@@ -1,3 +1,4 @@
+
 # 🛍 Automatic Detail Page System
 
 엑셀 + 상품 이미지를 기반으로  
@@ -28,6 +29,7 @@ n8n (워크플로우)
 드랩아트 API
     ↓
 상세페이지 결과
+
 📂 폴더 구조
 automatic-program/
  ┣ workflow/
@@ -41,6 +43,7 @@ automatic-program/
  ┃ ┗ docker-compose.yml
  ┣ .gitignore
  ┗ README.md
+
 🚀 실행 방법
 1. Docker 실행
 docker compose up -d
@@ -60,6 +63,7 @@ Webhook을 이용하여 테스트:
 curl -X POST "http://localhost:5679/webhook-test/upload" \
   -F "image=@data/sample/test.jpg" \
   -F "excel=@data/sample/test.xlsx"
+
 🧠 핵심 기능
 1. 엑셀 데이터 처리
 상품명
@@ -84,6 +88,7 @@ AI 입력용 draftPrompt 생성
 깔끔하고 단정한 분위기 강조
 핏이 잘 드러나게 구성
 고급스럽고 차분한 느낌
+
 ⚠️ 주의사항
 ❗ API 키는 업로드 금지
 
@@ -105,27 +110,3 @@ GitHub 저장소 clone
 docker 실행
 n8n workflow import
 동일 환경에서 작업
-🔥 한 줄 정리
-
-엑셀 + 이미지 → AI → 상세페이지 자동 생성 시스템
-
-
----
-
-# 🔥 설명 (왜 이렇게 구성했냐)
-
-이 README는 3가지를 만족한다:
-
-### 1. 처음 보는 사람도 이해 가능
-- 개요 있음
-- 구조 있음
-
-### 2. 바로 실행 가능
-- docker
-- n8n
-- curl
-
-### 3. 확장성 고려
-- 향후 계획 포함
-
----
