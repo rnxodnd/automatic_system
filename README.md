@@ -30,7 +30,9 @@ n8n (워크플로우)
     ↓
 상세페이지 결과
 
-📂 폴더 구조
+---
+
+# 📂 폴더 구조
 automatic-program/
  ┣ workflow/
  ┃ ┗ detailpage-workflow.json
@@ -44,7 +46,7 @@ automatic-program/
  ┣ .gitignore
  ┗ README.md
 
-🚀 실행 방법
+# 🚀 실행 방법
 1. Docker 실행
 docker compose up -d
 2. n8n 접속
@@ -64,7 +66,7 @@ curl -X POST "http://localhost:5679/webhook-test/upload" \
   -F "image=@data/sample/test.jpg" \
   -F "excel=@data/sample/test.xlsx"
 
-🧠 핵심 기능
+# 🧠 핵심 기능
 1. 엑셀 데이터 처리
 상품명
 색상
@@ -79,7 +81,8 @@ AI 입력용 draftPrompt 생성
 이미지 분석
 상품 특성 해석
 상세페이지 구성 자동 생성
-📌 관리자 코멘트 가이드
+
+# 📌 관리자 코멘트 가이드
 
 관리자 코멘트는 결과 품질에 큰 영향을 줍니다.
 
@@ -89,7 +92,7 @@ AI 입력용 draftPrompt 생성
 핏이 잘 드러나게 구성
 고급스럽고 차분한 느낌
 
-⚠️ 주의사항
+# ⚠️ 주의사항
 ❗ API 키는 업로드 금지
 
 다음 파일은 GitHub에 올리지 마세요:
