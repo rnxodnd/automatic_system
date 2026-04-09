@@ -110,14 +110,14 @@ AI 입력용 draftPrompt 생성
 API Key
 개인 설정 파일
 ❗ 이미지 품질 중요
-정면 이미지 권장
-상품이 잘 보이도록 촬영
-📌 향후 확장 계획
+
+# 📌 향후 확장 계획
 이미지 자동 선택 로직
 품질 검수(QC) 자동화
 플랫폼별 상세페이지 변환
 Python 기반 AI 처리 서버 연동
-👥 협업 방법
+
+# 👥 협업 방법
 GitHub 저장소 clone
 docker 실행
 n8n workflow import
