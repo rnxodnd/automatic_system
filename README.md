@@ -33,7 +33,7 @@ n8n (워크플로우)
 ---
 
 # 📂 폴더 구조
-automatic-program/
+```automatic-program/
  ┣ workflow/
  ┃ ┗ detailpage-workflow.json
  ┣ data/
