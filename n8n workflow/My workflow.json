@@ -1,0 +1,154 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "respondWith": "json",
+        "responseBody": "{\n  \"message\": \"upload received\"\n}",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        704,
+        0
+      ],
+      "id": "8b44bf82-59e7-48f0-8880-36287d7c9265",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "upload",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -128,
+        0
+      ],
+      "id": "8d84fe17-2799-485b-8078-84103052188d",
+      "name": "입력-파일 업로드",
+      "webhookId": "ab714b1a-aa46-4792-b821-46d9bc4cb3ae"
+    },
+    {
+      "parameters": {
+        "operation": "xlsx",
+        "binaryPropertyName": "excel",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.extractFromFile",
+      "typeVersion": 1.1,
+      "position": [
+        80,
+        0
+      ],
+      "id": "0823d7d1-9cae-45ca-90ed-7d6b763975e7",
+      "name": "엑셀파일 읽기"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "fa83e10b-35b4-48ad-ba2e-832852d271f3",
+              "name": "구분",
+              "value": "={{$json[\"구분\"]}}",
+              "type": "string"
+            },
+            {
+              "id": "0c50834c-fa40-4269-b3c1-1c9925ebfc3a",
+              "name": "가격",
+              "value": "={{$json[\"가격\"]}}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        288,
+        0
+      ],
+      "id": "26d0327c-0341-4b4c-9dc9-3ac52205db97",
+      "name": "데이터 정리"
+    },
+    {
+      "parameters": {
+        "jsCode": "const name = $json[\"구분\"] || \"\";\nconst price = $json[\"가격\"] || \"\";\nconst color = $json[\"색상\"] || \"\";\nconst material = $json[\"소재\"] || \"\";\nconst comment = $json[\"관리자코멘트\"] || \"\";\nconst size = $json[\"사이즈\"] || \"\";\nconst productCode = $json[\"상품코드\"] || \"\";\n\nconst draftPrompt = `\n상품 기본 정보:\n- 상품명: ${name}\n- 상품코드: ${productCode}\n- 색상: ${color}\n- 사이즈: ${size}\n- 가격: ${price}\n- 소재: ${material}\n- 관리자 코멘트: ${comment}\n\n작성 요청:\n- 업로드된 상품 이미지와 상품 기본 정보를 함께 참고할 것\n- 이미지에서 확인되는 상품의 형태, 분위기, 디테일, 착용 인상을 반영할 것\n- 엑셀에 있는 정보는 사실 기반 정보로 사용하고, 부족한 분위기 해석은 이미지 기준으로 보완할 것\n- 특정 스타일을 미리 단정하지 말고, 상품에 맞는 방향으로 상세페이지 프롬프트를 구성할 것\n- 과장 없이 상품 특성을 잘 전달할 수 있는 방향으로 작성할 것\n\n목적:\n온라인 의류 쇼핑몰용 상세페이지 제작을 위한 프롬프트 초안 정리\n`;\n\nreturn [\n  {\n    json: {\n      productName: name,\n      productCode: productCode,\n      price: price,\n      color: color,\n      size: size,\n      material: material,\n      comment: comment,\n      draftPrompt: draftPrompt.trim()\n    }\n  }\n];"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        496,
+        0
+      ],
+      "id": "485d0baa-cb2e-4e74-9167-2474861fd0c3",
+      "name": "기본 프롬포트 틀 생성"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "입력-파일 업로드": {
+      "main": [
+        [
+          {
+            "node": "엑셀파일 읽기",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "엑셀파일 읽기": {
+      "main": [
+        [
+          {
+            "node": "데이터 정리",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "데이터 정리": {
+      "main": [
+        [
+          {
+            "node": "기본 프롬포트 틀 생성",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "기본 프롬포트 틀 생성": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "3ec4bbd6-b69b-4043-b756-cc659558e907",
+  "meta": {
+    "instanceId": "2f51c073e9b02b6e4a73ef2672b27541c1619faa5cc045fd6064d4bee5e42794"
+  },
+  "id": "dLWR9smPh2VFnnvu",
+  "tags": []
+}
