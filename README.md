@@ -29,11 +29,12 @@ n8n (워크플로우)
 드랩아트 API
     ↓
 상세페이지 결과
+```
 
 ---
 
 # 📂 폴더 구조
-```automatic-program/
+automatic-program/
  ┣ workflow/
  ┃ ┗ detailpage-workflow.json
  ┣ data/
